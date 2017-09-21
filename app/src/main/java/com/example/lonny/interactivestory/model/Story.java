@@ -19,4 +19,11 @@ public class Story {
                 new Choice (R.string.page0_choice2,2 ));
 
     }
+
+    public Page getPage(int pageNumber) {
+        if (pageNumber >= pages.length){
+            pageNumber=0;
+        }
+        return pages[pageNumber];
+    }
 }
