@@ -13,11 +13,10 @@ public class Story {
     public Story(){
         pages= new Page[7];
 
-        pages[0] = new Page();
-        pages[0].setImageId(R.drawable.page0);
-        pages[0].setTextId(R.string.page0);
-        pages[0].setChoice1(new Choice());
-        pages[0].setChoice2(new Choice());
+        pages[0]=new Page (R.drawable.page0,
+                R.string.page0,
+                new Choice (R.string.page0_choice1,1),
+                new Choice (R.string.page0_choice2,2 ));
 
     }
 }

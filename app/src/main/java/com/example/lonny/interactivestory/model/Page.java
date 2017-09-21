@@ -9,6 +9,7 @@ public class Page {
     private int textId;
     private Choice choice1;
     private Choice choice2;
+    private Boolean isFinalPage = false;
 
     public Page(int imageId, int textId, Choice choice1, Choice choice2) {
         this.imageId = imageId;
@@ -17,6 +18,19 @@ public class Page {
         this.choice2 = choice2;
     }
 
+    public Page(int imageId, int textId) {
+        this.imageId = imageId;
+        this.textId = textId;
+        this.isFinalPage = true;
+    }
+
+    public Boolean getFinalPage() {
+        return isFinalPage;
+    }
+
+    public void setFinalPage(Boolean finalPage) {
+        isFinalPage = finalPage;
+    }
 
     public int getImageId() {
         return imageId;
