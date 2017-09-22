@@ -15,6 +15,8 @@ import com.example.lonny.interactivestory.R;
 import com.example.lonny.interactivestory.model.Page;
 import com.example.lonny.interactivestory.model.Story;
 
+import java.util.Stack;
+
 public class StoryActivity extends AppCompatActivity {
 
     public static final String TAG =StoryActivity.class.getSimpleName();
@@ -25,6 +27,7 @@ public class StoryActivity extends AppCompatActivity {
     private TextView storyTextView;
     private Button choice1Button;
     private Button choice2Button;
+    private Stack<Integer> pageStack = new Stack<Integer>();
 
 
 
@@ -37,6 +40,7 @@ public class StoryActivity extends AppCompatActivity {
         storyTextView = (TextView)findViewById(R.id.storyTextView);
         choice1Button = (Button)findViewById(R.id.choice1Button);
         choice2Button = (Button)findViewById(R.id.choice2Button);
+
 
         Intent intent = getIntent();
         name = intent.getStringExtra(getString(R.string.key_name));
@@ -53,6 +57,8 @@ public class StoryActivity extends AppCompatActivity {
     }
 
     private void loadPage(int pageNumber) {
+        pageStack.push(pageNumber);
+
         final Page page = story.getPage(pageNumber);
         Drawable image = ContextCompat.getDrawable(this,page.getImageId());
         storyImageView.setImageDrawable(image);
@@ -65,6 +71,13 @@ public class StoryActivity extends AppCompatActivity {
         if(page.isFinalPage()) {
             choice1Button.setVisibility(View.INVISIBLE);
             choice2Button.setText(R.string.play_again_button_text);
+            choice2Button.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    finish();
+
+                }
+            });
 
         }
         else {
@@ -91,5 +104,15 @@ public class StoryActivity extends AppCompatActivity {
             }
 
         });
+    }
+    @Override
+    public void onBackPressed(){
+        pageStack.pop();
+        if(pageStack.isEmpty()){
+            super.onBackPressed();
+        }
+        else{
+            loadPage(pageStack.pop());
+        }
     }
 }
