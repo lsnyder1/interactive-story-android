@@ -24,7 +24,7 @@ public class Page {
         this.isFinalPage = true;
     }
 
-    public Boolean getFinalPage() {
+    public Boolean isFinalPage() {
         return isFinalPage;
     }
 
